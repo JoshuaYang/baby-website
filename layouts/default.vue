@@ -1,8 +1,42 @@
 <template>
-  <div>
-    <nuxt/>
-  </div>
+<div>
+  <Layout>
+    <Header :style="{position: 'fixed', width: '100%', zIndex: 1}">
+      <Menu
+        mode="horizontal"
+        theme="dark"
+        @on-select="gotoPage"
+        >
+        <MenuItem name="/">
+          <Icon type="ios-home" />
+          首頁
+        </MenuItem>
+
+        <MenuItem name="/timeline">
+          <Icon type="ios-navigate" />
+          成長時間線
+        </MenuItem>
+      </Menu>
+    </Header>
+
+    <Content :style="{margin: '88px 20px 0', padding: '25px', background: '#fff', minHeight: '500px'}">
+      <nuxt />
+    </Content>
+
+    <Footer class="layout-footer-center">2011-2016 &copy; TalkingData</Footer>
+  </Layout>
+</div>
 </template>
+
+<script>
+export default {
+  methods: {
+    gotoPage (link) {
+      this.$router.push(link);
+    },
+  },
+};
+</script>
 
 <style>
 html {

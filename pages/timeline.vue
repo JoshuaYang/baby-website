@@ -10,10 +10,10 @@
 
     <Timeline pending>
       <TimelineItem>
-        <p class="time">
+        <div class="time">
           2018-12-12
           <Tag color="primary">1月龄</Tag>
-        </p>
+        </div>
 
         <div class="content">
           <Badge
@@ -39,16 +39,16 @@
           type="ios-woman"
         />
 
-        <p class="time">
+        <div class="time">
           today
-        </p>
+        </div>
       </TimelineItem>
 
       <TimelineItem>
-        <p class="time">
+        <div class="time">
           2018-12-12
           <Tag color="primary">1月龄</Tag>
-        </p>
+        </div>
 
         <div class="content">
           <Badge
@@ -69,10 +69,10 @@
       </TimelineItem>
 
       <TimelineItem>
-        <p class="time">
+        <div class="time">
           2018-12-12
           <Tag color="primary">1月龄</Tag>
-        </p>
+        </div>
 
         <div class="content">
           <Badge
@@ -93,10 +93,10 @@
       </TimelineItem>
 
       <TimelineItem>
-        <p class="time">
+        <div class="time">
           2018-12-12
           <Tag color="primary">1月龄</Tag>
-        </p>
+        </div>
 
         <div class="content">
           <Badge
