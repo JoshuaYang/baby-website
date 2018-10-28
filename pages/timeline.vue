@@ -2,38 +2,34 @@
   <div class="page-baby-timeline">
     <Row :gutter="32">
       <Col span="6">
-        <DatePicker
-          type="date"
-          placeholder="出生日期"
-          style="width: 200px"
-        />
-        <Alert class="alert-summary">
-          年齡：1歲5月23天<br />
-          月齡：17月23天<br />
+        <Form>
+          <FormItem label="出生日期">
+            <DatePicker
+              type="date"
+              placeholder="請選擇"
+              v-model="birthday"
+            />
+          </FormItem>
+        </Form>
+
+        <Alert class="alert-summary" v-if="shouldShowInfo">
+          年齡：{{yearAge}}<br />
+          月齡：{{monthAge}}<br />
         </Alert>
       </Col>
+
       <Col span="18">
-        <Timeline pending>
-          <TimelineItem>
+        <Timeline pending v-if="shouldShowInfo">
+          <TimelineItem v-for="(datas, monthAge) in timelineData" :key="monthAge">
             <div class="time">
-              2018-12-12
-              <Tag color="primary">1月龄</Tag>
+              {{birthday | addMonthAge(monthAge)}}
+              <Tag color="primary">{{monthAge}}月龄</Tag>
             </div>
 
             <div class="content">
-              <Badge
+              <Badge v-for="(data, dataIndex) in datas" :key="dataIndex"
                 status="success"
-                text="打针1"
-              />
-
-              <Badge
-                status="success"
-                text="打针2"
-              />
-
-              <Badge
-                status="processing"
-                text="打针3"
+                :text="data.title"
               />
             </div>
           </TimelineItem>
@@ -49,78 +45,6 @@
             </div>
           </TimelineItem>
 
-          <TimelineItem>
-            <div class="time">
-              2018-12-12
-              <Tag color="primary">1月龄</Tag>
-            </div>
-
-            <div class="content">
-              <Badge
-                status="success"
-                text="打针1"
-              />
-
-              <Badge
-                status="success"
-                text="打针2"
-              />
-
-              <Badge
-                status="processing"
-                text="打针3"
-              />
-            </div>
-          </TimelineItem>
-
-          <TimelineItem>
-            <div class="time">
-              2018-12-12
-              <Tag color="primary">1月龄</Tag>
-            </div>
-
-            <div class="content">
-              <Badge
-                status="success"
-                text="打针1"
-              />
-
-              <Badge
-                status="success"
-                text="打针2"
-              />
-
-              <Badge
-                status="processing"
-                text="打针3"
-              />
-            </div>
-          </TimelineItem>
-
-          <TimelineItem>
-            <div class="time">
-              2018-12-12
-              <Tag color="primary">1月龄</Tag>
-            </div>
-
-            <div class="content">
-              <Badge
-                status="success"
-                text="打针1"
-              />
-
-              <Badge
-                status="success"
-                text="打针2"
-              />
-
-              <Badge
-                status="processing"
-                text="打针3"
-              />
-            </div>
-          </TimelineItem>
-
           <TimelineItem>...</TimelineItem>
         </Timeline>
       </Col>
@@ -129,7 +53,70 @@
 </template>
 
 <script>
-export default {};
+import dayjs from 'dayjs';
+
+import timelineData from '@/assets/timelineData';
+
+export default {
+  data () {
+    return {
+      timelineData,
+      birthday: '',
+    };
+  },
+  computed: {
+    shouldShowInfo () {
+      return !!this.birthday;
+    },
+    yearAge () {
+      if (!this.shouldShowInfo) return;
+
+      const today = dayjs()
+        .set('h', 0)
+        .set('m', 0)
+        .set('s', 0)
+        .set('ms', 0);
+      let birthday = dayjs(this.birthday);
+
+      const year = today.diff(birthday, 'year');
+      birthday = birthday.add(year, 'year');
+
+      const month = today.diff(birthday, 'month');
+      birthday = birthday.add(month, 'month');
+
+      const day = today.diff(birthday, 'day');
+
+      return `${Math.abs(year)}歲${Math.abs(month)}月${Math.abs(day)}天`;
+    },
+    monthAge () {
+      if (!this.shouldShowInfo) return;
+
+      const today = dayjs()
+        .set('h', 0)
+        .set('m', 0)
+        .set('s', 0)
+        .set('ms', 0);
+      let birthday = dayjs(this.birthday);
+
+      // const year = today.diff(birthday, 'year');
+      // birthday = birthday.add(year, 'year');
+
+      const month = today.diff(birthday, 'month');
+      birthday = birthday.add(month, 'month');
+
+      const day = today.diff(birthday, 'day');
+
+      return `${Math.abs(month)}月${Math.abs(day)}天`;
+    },
+  },
+  filters: {
+    addMonthAge (value, monthAge) {
+      return dayjs(value)
+        .add(monthAge, 'month')
+        .format('YYYY-MM-DD');
+    },
+  },
+};
 </script>
 
 <style lang="scss">
