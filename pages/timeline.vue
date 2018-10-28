@@ -86,7 +86,7 @@ export default {
 
       const day = today.diff(birthday, 'day');
 
-      return `${Math.abs(year)}歲${Math.abs(month)}月${Math.abs(day)}天`;
+      return `${year}歲${month}月${day}天`;
     },
     monthAge () {
       if (!this.shouldShowInfo) return;
@@ -98,15 +98,12 @@ export default {
         .set('ms', 0);
       let birthday = dayjs(this.birthday);
 
-      // const year = today.diff(birthday, 'year');
-      // birthday = birthday.add(year, 'year');
-
       const month = today.diff(birthday, 'month');
       birthday = birthday.add(month, 'month');
 
       const day = today.diff(birthday, 'day');
 
-      return `${Math.abs(month)}月${Math.abs(day)}天`;
+      return `${month}月${day}天`;
     },
   },
   filters: {
