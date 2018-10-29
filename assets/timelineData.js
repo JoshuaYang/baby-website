@@ -23,7 +23,11 @@ const data = [
   },
   {
     monthAge: 0.5,
-    title: 'AD',
+    title: '補充AD',
+  },
+  {
+    monthAge: 0.5,
+    title: '補充維生素D',
   },
 ];
 
