@@ -20,14 +20,14 @@
 
       <Col span="18">
         <Timeline pending v-if="shouldShowInfo">
-          <TimelineItem v-for="(datas, monthAge) in timelineData" :key="monthAge">
+          <TimelineItem v-for="(item, index) in timelineData" :key="index">
             <div class="time">
-              {{birthday | addMonthAge(monthAge)}}
-              <Tag color="primary">{{monthAge}}月龄</Tag>
+              {{birthday | addMonthAge(item.monthAge)}}
+              <Tag color="primary">{{item.monthAge}}月龄</Tag>
             </div>
 
             <div class="content">
-              <Badge v-for="(data, dataIndex) in datas" :key="dataIndex"
+              <Badge v-for="(data, dataIndex) in item.data" :key="dataIndex"
                 status="success"
                 :text="data.title"
               />
