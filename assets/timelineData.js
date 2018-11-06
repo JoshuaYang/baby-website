@@ -97,11 +97,11 @@ const data = [
 
   {
     monthAge: 0.5,
-    title: '補充AD',
+    title: '開始補充AD',
   },
   {
     monthAge: 0.5,
-    title: '補充維生素D',
+    title: '開始補充維生素D',
   },
 
   {

@@ -12,7 +12,11 @@
               <Tag>双歧杆菌</Tag>
             </Tooltip>
             ，若無效，則改用
-            <Tag>茵梔黃口服液</Tag>
+            <Tooltip
+              placement="top"
+              content="国药准字Z11020607">
+              <Tag>茵梔黃口服液</Tag>
+            </Tooltip>
           </p>
         </div>
       </Panel>
