@@ -28,16 +28,15 @@
 
             <div class="content">
               <div class="content-item" v-for="(data, dataIndex) in item.data" :key="dataIndex">
-                <Poptip
+                <Tooltip
                   v-if="!!data.description"
-                  trigger="hover"
                   placement="right"
                   :content="data.description">
                   <Badge
                     status="success"
                     :text="data.title"
                   />
-                </Poptip>
+                </Tooltip>
                 <Badge
                   v-else
                   status="success"
@@ -158,6 +157,10 @@ export default {
           }
           .ivu-badge-status-text {
             font-size: 15px;
+          }
+
+          .ivu-tooltip-inner {
+            max-width: none;
           }
       }
   }
