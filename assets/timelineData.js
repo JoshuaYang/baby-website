@@ -103,6 +103,16 @@ const data = [
     monthAge: 0.5,
     title: '補充維生素D',
   },
+
+  {
+    monthAge: 0,
+    title: '上戶口',
+    description: '帶著父母雙方戶口本、雙方身份證、雙方結婚證、出生證明，去戶口所在派出所辦理',
+  },
+  {
+    monthAge: 0,
+    title: '圍產卡交到社區',
+  },
 ];
 
 // 根據月齡分組，鍵為月齡

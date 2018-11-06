@@ -27,10 +27,23 @@
             </div>
 
             <div class="content">
-              <Badge v-for="(data, dataIndex) in item.data" :key="dataIndex"
-                status="success"
-                :text="data.title"
-              />
+              <div class="content-item" v-for="(data, dataIndex) in item.data" :key="dataIndex">
+                <Poptip
+                  v-if="!!data.description"
+                  trigger="hover"
+                  placement="right"
+                  :content="data.description">
+                  <Badge
+                    status="success"
+                    :text="data.title"
+                  />
+                </Poptip>
+                <Badge
+                  v-else
+                  status="success"
+                  :text="data.title"
+                />
+              </div>
             </div>
           </TimelineItem>
 
@@ -126,19 +139,25 @@ export default {
       margin-top: 20px;
 
       .time {
-          font-size: 14px;
+          font-size: 16px;
           font-weight: bold;
 
           .ivu-tag {
-              margin-left: 10px;
+            margin-left: 10px;
           }
       }
       .content {
-          margin-top: 10px;
+          margin-top: 15px;
           padding-left: 10px;
 
+          .content-item {
+            margin: 8px 0;
+          }
           .ivu-badge {
-              display: block;
+            display: block;
+          }
+          .ivu-badge-status-text {
+            font-size: 15px;
           }
       }
   }
