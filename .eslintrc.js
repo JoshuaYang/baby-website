@@ -14,7 +14,7 @@ module.exports = {
   rules: {
     // 命名
     'id-length': ['error', {
-        'exceptions': ['e', 'i', '_', '$'],
+        'exceptions': ['e', 'i', '_', '$', 'x', 'y'],
     }], // 命名长度不能太短
     'camelcase': 'error', // 强制使用驼峰命名法
     'new-cap': 'error', // 类或构造函数的首字母大写
