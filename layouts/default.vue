@@ -7,14 +7,14 @@
         theme="dark"
         @on-select="gotoPage"
         >
-        <MenuItem name="/">
-          <Icon type="ios-home" />
-          首頁
-        </MenuItem>
 
-        <MenuItem name="/timeline">
-          <Icon type="ios-navigate" />
-          成長時間線
+        <MenuItem
+          v-for="(config, configIndex) in routeConfig"
+          :key="configIndex"
+          :name="config.path"
+        >
+          <Icon :type="config.icon" />
+          {{config.title}}
         </MenuItem>
       </Menu>
     </Header>
@@ -29,7 +29,14 @@
 </template>
 
 <script>
+import routeConfig from '@/assets/routeConfig';
+
 export default {
+  data () {
+    return {
+      routeConfig,
+    };
+  },
   methods: {
     gotoPage (link) {
       this.$router.push(link);
