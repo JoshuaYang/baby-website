@@ -4,7 +4,7 @@
       <Panel>
         去黃疸
         <div slot="content" class="collapse-content">
-          <p>
+          <div class="text-container">
             服用
             <Tooltip
               placement="top"
@@ -17,7 +17,7 @@
               content="国药准字Z11020607">
               <Tag>茵梔黃口服液</Tag>
             </Tooltip>
-          </p>
+          </div>
         </div>
       </Panel>
 
@@ -51,7 +51,7 @@ export default {
 <style lang="scss">
 .page-tips {
   .collapse-content {
-    p {
+    .text-container {
       display: flex;
       align-items: center;
 
