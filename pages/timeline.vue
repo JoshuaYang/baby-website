@@ -135,34 +135,35 @@ export default {
   }
 
   .ivu-timeline {
-      margin-top: 20px;
+    margin-top: 20px;
 
-      .time {
-          font-size: 16px;
-          font-weight: bold;
+    .time {
+      font-size: 16px;
+      font-weight: bold;
 
-          .ivu-tag {
-            margin-left: 10px;
-          }
+      .ivu-tag {
+        margin-left: 10px;
       }
-      .content {
-          margin-top: 15px;
-          padding-left: 10px;
+    }
+    
+    .content {
+      margin-top: 15px;
+      padding-left: 10px;
 
-          .content-item {
-            margin: 8px 0;
-          }
-          .ivu-badge {
-            display: block;
-          }
-          .ivu-badge-status-text {
-            font-size: 15px;
-          }
-
-          .ivu-tooltip-inner {
-            max-width: none;
-          }
+      .content-item {
+        margin: 8px 0;
       }
+      .ivu-badge {
+        display: block;
+      }
+      .ivu-badge-status-text {
+        font-size: 15px;
+      }
+
+      .ivu-tooltip-inner {
+        max-width: none;
+      }
+    }
   }
 
 }
