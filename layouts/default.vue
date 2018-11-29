@@ -23,13 +23,13 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-toolbar fixed app color="pink lighten-2" dark>
+    <v-toolbar fixed app color="pink" dark>
       <v-toolbar-side-icon @click="showMenu = !showMenu"></v-toolbar-side-icon>
       <v-toolbar-title>{{title}}</v-toolbar-title>
     </v-toolbar>
 
     <v-content>
-      <v-container>
+      <v-container v-if="birthday">
         <nuxt />
       </v-container>
     </v-content>
@@ -61,16 +61,18 @@
       width="300"
     >
       <v-date-picker
+        color="pink"
         full-width
         scrollable
-        v-model="date"
-        @input="birthdayDialogVisible = false"
+        v-model="birthday"
+        @input="saveBirthday"
       />
     </v-dialog>
   </v-app>
 </template>
 
 <script>
+// import dayjs from 'dayjs'
 import routeConfig from '@/assets/config/router.config'
 
 export default {
@@ -80,8 +82,24 @@ export default {
       showMenu: false,
       routeConfig,
 
-      date: new Date().toISOString().substr(0, 10),
-      birthdayDialogVisible: true
+      birthday: '',
+      birthdayDialogVisible: false
+    }
+  },
+  methods: {
+    saveBirthday () {
+      localStorage.setItem('birthday', this.birthday)
+
+      this.birthdayDialogVisible = false
+    }
+  },
+  mounted () {
+    const birthday = localStorage.getItem('birthday')
+
+    if (birthday) {
+      this.birthday = birthday
+    } else {
+      this.birthdayDialogVisible = true
     }
   }
 }
