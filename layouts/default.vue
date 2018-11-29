@@ -23,15 +23,18 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar fixed app>
+
+    <v-toolbar fixed app color="pink lighten-2" dark>
       <v-toolbar-side-icon @click="showMenu = !showMenu"></v-toolbar-side-icon>
       <v-toolbar-title>{{title}}</v-toolbar-title>
     </v-toolbar>
+
     <v-content>
       <v-container>
         <nuxt />
       </v-container>
     </v-content>
+
     <v-footer app>
       <span>&copy; 2018 Joshua</span>
     </v-footer>
@@ -39,12 +42,12 @@
 </template>
 
 <script>
-import routeConfig from '@/assets/routeConfig'
+import routeConfig from '@/assets/config/router.config'
 
 export default {
   data () {
     return {
-      title: 'Website',
+      title: 'Baby Website',
       showMenu: false,
       routeConfig
     }

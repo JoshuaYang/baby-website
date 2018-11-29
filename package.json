@@ -4,13 +4,21 @@
   "description": "Nuxt.js + Vuetify.js project",
   "author": "Joshua Yang <yss901025@gmail.com>",
   "private": true,
+  "config": {
+    "nuxt": {
+      "host": "0.0.0.0",
+      "port": "3003"
+    }
+  },
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "pm": "pm2 start npm --name \"baby-website\" -- start"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "dayjs": "^1.7.7",
     "lodash": "^4.17.11",
     "nuxt": "^2.2.0",
