@@ -3,8 +3,7 @@
     <v-navigation-drawer
       v-model="showMenu"
       fixed
-      app
-    >
+      app>
       <v-list>
         <v-list-tile
           router
@@ -36,8 +35,38 @@
     </v-content>
 
     <v-footer app>
+      <v-spacer />
       <span>&copy; 2018 Joshua</span>
+      <v-spacer />
     </v-footer>
+
+
+
+    <v-btn
+      fixed
+      dark
+      fab
+      bottom
+      right
+      color="pink"
+      @click="birthdayDialogVisible = true"
+    >
+      <v-icon>cake</v-icon>
+    </v-btn>
+
+    <v-dialog
+      v-model="birthdayDialogVisible"
+      persistent
+      lazy
+      width="300"
+    >
+      <v-date-picker
+        full-width
+        scrollable
+        v-model="date"
+        @input="birthdayDialogVisible = false"
+      />
+    </v-dialog>
   </v-app>
 </template>
 
@@ -49,7 +78,10 @@ export default {
     return {
       title: 'Baby Website',
       showMenu: false,
-      routeConfig
+      routeConfig,
+
+      date: new Date().toISOString().substr(0, 10),
+      birthdayDialogVisible: true
     }
   }
 }

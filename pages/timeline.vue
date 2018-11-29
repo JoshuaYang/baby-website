@@ -56,6 +56,7 @@ import dayjs from 'dayjs'
 import {
   timelineData
 } from '@/assets/timelineData'
+console.log('==========', timelineData)
 
 export default {
   data () {
