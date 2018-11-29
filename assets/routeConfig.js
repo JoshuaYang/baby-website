@@ -1,13 +1,17 @@
-export default [{
-  path: '/',
-  title: '首頁',
-  icon: 'ios-home',
-}, {
-  path: '/timeline',
-  title: '成長時間線',
-  icon: 'ios-navigate',
-}, {
-  path: '/tips',
-  title: '小貼士',
-  icon: 'ios-pricetag',
-}];
+export default [
+  {
+    icon: 'apps',
+    title: '首頁',
+    to: '/'
+  },
+  {
+    icon: 'apps',
+    title: '成長時間線',
+    to: '/timeline'
+  },
+  {
+    icon: 'apps',
+    title: '小貼士',
+    to: '/tips'
+  }
+]
