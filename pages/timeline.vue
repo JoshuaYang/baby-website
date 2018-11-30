@@ -4,11 +4,12 @@
       <v-timeline-item
         v-for="(item, index) in timelineData"
         :key="index"
+        color="pink"
       >
         <v-card class="elevation-2">
           <v-card-title class="headline">
             {{$store.state.birthday | addMonthAge(item.monthAge)}}
-            <v-chip class="chip-monthage" color="primary" text-color="white">
+            <v-chip class="chip-monthage" color="pink" text-color="white">
               {{item.monthAge}}月龄
             </v-chip>
           </v-card-title>
