@@ -32,9 +32,13 @@
 import dayjs from 'dayjs'
 
 import {
+  queryTimelines
+} from '@/assets/services/timeline'
+
+import {
   timelineData
 } from '@/assets/timelineData'
-console.log('==========', timelineData)
+// console.log('==========', timelineData)
 
 export default {
   data () {
@@ -53,6 +57,11 @@ export default {
         .add(monthAge, 'month')
         .format('YYYY-MM-DD')
     }
+  },
+  async mounted () {
+    const response = await queryTimelines()
+
+    console.log('==========', response.data)
   }
 }
 </script>

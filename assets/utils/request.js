@@ -16,11 +16,7 @@ axiosInstance.interceptors.response.use(
     return response
   },
   error => {
-    if (error.response.status === 403) {
-      window.location.href = '/'
-    } else {
-      $toast.show(error.response.data.message)
-    }
+    $toast.show(error.response.data.message)
 
     return Promise.reject(error)
   }

@@ -15,7 +15,8 @@ module.exports = {
     ]
   },
   plugins: [
-    '~/plugins/vuetify.js'
+    '~/plugins/vuetify.js',
+    '~/plugins/toast'
   ],
   css: ['~/assets/style/app.styl'],
   /*
