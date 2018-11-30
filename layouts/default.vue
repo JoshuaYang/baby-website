@@ -60,6 +60,10 @@
       lazy
       width="300"
     >
+      <v-toolbar dark color="pink">
+        <v-toolbar-title>寶寶生日</v-toolbar-title>
+      </v-toolbar>
+
       <v-date-picker
         color="pink"
         full-width
@@ -88,7 +92,9 @@ export default {
   },
   methods: {
     saveBirthday () {
-      localStorage.setItem('birthday', this.birthday)
+      this.$store.commit('setBirthday', {
+        birthday: this.birthday
+      })
 
       this.birthdayDialogVisible = false
     }
@@ -97,6 +103,9 @@ export default {
     const birthday = localStorage.getItem('birthday')
 
     if (birthday) {
+      this.$store.commit('setBirthday', {
+        birthday
+      })
       this.birthday = birthday
     } else {
       this.birthdayDialogVisible = true

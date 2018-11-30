@@ -1,9 +1,11 @@
 export const state = () => ({
-  sidebar: false
+  birthday: ''
 })
 
 export const mutations = {
-  toggleSidebar (state) {
-    state.sidebar = !state.sidebar
+  setBirthday (state, { birthday }) {
+    state.birthday = birthday
+
+    localStorage.setItem('birthday', birthday)
   }
 }

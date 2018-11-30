@@ -1,28 +1,5 @@
 <template lang="html">
   <div class="page-timeline">
-    <v-flex xs12 sm6 md4>
-      <v-dialog
-        v-model="showModal"
-        lazy
-        full-width
-        width="290px"
-      >
-        <v-text-field
-          slot="activator"
-          v-model="birthday"
-          label="出生日期"
-          prepend-icon="event"
-          readonly
-        ></v-text-field>
-
-        <v-date-picker
-          v-model="birthday"
-          @input="showModal = false"
-        />
-      </v-dialog>
-    </v-flex>
-
-
     <v-timeline dense>
       <v-timeline-item
         v-for="(item, index) in timelineData"
@@ -30,7 +7,7 @@
       >
         <v-card class="elevation-2">
           <v-card-title class="headline">
-            {{birthday | addMonthAge(item.monthAge)}}
+            {{$store.state.birthday | addMonthAge(item.monthAge)}}
             <v-chip class="chip-monthage" color="primary" text-color="white">
               {{item.monthAge}}月龄
             </v-chip>
@@ -61,9 +38,7 @@ console.log('==========', timelineData)
 export default {
   data () {
     return {
-      timelineData,
-      birthday: dayjs().format('YYYY-MM-DD'),
-      showModal: false
+      timelineData
     }
   },
   filters: {
