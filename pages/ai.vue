@@ -13,7 +13,7 @@ export default {
     testHandler () {
       textTrans({
         type: 0,
-        text: 'hello'
+        text: '幾點了？'
       })
     }
   }
