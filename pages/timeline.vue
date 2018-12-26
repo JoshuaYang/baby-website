@@ -66,7 +66,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .page-timeline {
   .v-timeline {
     .chip-monthage {

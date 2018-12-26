@@ -13,5 +13,9 @@ export default [
     icon: 'apps',
     title: '小貼士',
     to: '/tips'
+  },
+  {
+    title: 'AI',
+    to: '/ai'
   }
 ]

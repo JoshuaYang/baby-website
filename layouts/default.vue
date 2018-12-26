@@ -60,10 +60,6 @@
       lazy
       width="300"
     >
-      <v-toolbar dark color="pink">
-        <v-toolbar-title>寶寶生日</v-toolbar-title>
-      </v-toolbar>
-
       <v-date-picker
         color="pink"
         full-width
@@ -108,6 +104,7 @@ export default {
       })
       this.birthday = birthday
     } else {
+      this.$toast.show('請設置寶寶生日')
       this.birthdayDialogVisible = true
     }
   }
