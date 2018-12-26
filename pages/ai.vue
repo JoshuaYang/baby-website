@@ -13,7 +13,7 @@ export default {
     testHandler () {
       textTrans({
         type: 0,
-        text: '今天天气怎么样'
+        text: 'hello'
       })
     }
   }
