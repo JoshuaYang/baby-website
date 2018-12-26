@@ -39,5 +39,12 @@ module.exports = {
         })
       }
     }
+  },
+
+  modules: [
+    '@nuxtjs/proxy'
+  ],
+  proxy: {
+    '/fcgi-bin': 'https://api.ai.qq.com'
   }
 }

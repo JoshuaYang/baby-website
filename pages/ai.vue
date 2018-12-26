@@ -1,10 +1,22 @@
 <template>
-  <h1>123</h1>
+  <v-btn @click="testHandler">test</v-btn>
 </template>
 
 <script>
-export default {
+import {
+  textTrans
+  // getWeather
+} from '@/assets/services/ai'
 
+export default {
+  methods: {
+    testHandler () {
+      textTrans({
+        type: 0,
+        text: '今天天气怎么样'
+      })
+    }
+  }
 }
 </script>
 
