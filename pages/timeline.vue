@@ -31,11 +31,20 @@
                 @click="">
 
                 <v-list-tile-action>
-                  <v-checkbox v-model="item.checked" hide-details></v-checkbox>
+                  <v-checkbox
+                    hide-details
+                    color="pink"
+                    v-model="item.checked"
+                    @change="checkedChangeHandler(item, $event)"
+                  />
                 </v-list-tile-action>
 
                 <v-list-tile-content>
-                  <v-list-tile-title>
+                  <v-list-tile-title
+                    :class="[{
+                      complete: item.checked
+                    }]"
+                  >
                     {{item.description}}
                   </v-list-tile-title>
                 </v-list-tile-content>
@@ -51,8 +60,16 @@
 </template>
 
 <script>
-import _ from 'lodash'
+import {
+  groupBy,
+  defaultsDeep
+} from 'lodash'
 import dayjs from 'dayjs'
+
+import {
+  getStorage,
+  setStorage
+} from '@/assets/utils'
 
 import {
   queryTimelines
@@ -79,7 +96,7 @@ export default {
   methods: {
     parseTimelineData (data) {
       // 根據月齡分組，鍵為月齡
-      const groupMonthAgeDatas = _.groupBy(data, 'monthAge')
+      const groupMonthAgeDatas = groupBy(data, 'monthAge')
 
       // 將分組的鍵根據時間先後排序
       const sortedKeys = Object.keys(groupMonthAgeDatas).sort((x, y) => x - y)
@@ -88,7 +105,7 @@ export default {
       const timelineData = sortedKeys.map(key => {
         const groupMonthAgeData = groupMonthAgeDatas[key]
 
-        const groupCategoryDatas = _.groupBy(groupMonthAgeData, 'category.name')
+        const groupCategoryDatas = groupBy(groupMonthAgeData, 'category.name')
 
         const groupCategoryData = []
         for (const [key, value] of Object.entries(groupCategoryDatas)) {
@@ -105,15 +122,31 @@ export default {
       })
 
       return timelineData
+    },
+
+    checkedChangeHandler (item, value) {
+      item.checked = value
+
+      setStorage('timelineData', this.timelineData)
     }
   },
   async mounted () {
     const response = await queryTimelines()
 
-    this.timelineData = this.parseTimelineData(response.data.list)
+    const responseData = this.parseTimelineData(response.data.list)
+    const storageData = getStorage('timelineData') || {}
+
+    console.log(storageData)
+
+    const timelineData = defaultsDeep(storageData, responseData)
+
+    this.timelineData = timelineData
   }
 }
 </script>
 
 <style scoped lang="scss">
+.complete {
+  text-decoration: line-through;
+}
 </style>
