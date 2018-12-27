@@ -26,6 +26,11 @@
     <v-toolbar fixed app color="pink" dark>
       <v-toolbar-side-icon @click="showMenu = !showMenu"></v-toolbar-side-icon>
       <v-toolbar-title>{{title}}</v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      <v-icon>face</v-icon>
+      <span class="showAge">{{yearAge}}</span>
     </v-toolbar>
 
     <v-content>
@@ -39,7 +44,6 @@
       <span>&copy; 2018 Joshua</span>
       <v-spacer />
     </v-footer>
-
 
 
     <v-btn
@@ -72,8 +76,12 @@
 </template>
 
 <script>
-// import dayjs from 'dayjs'
+import dayjs from 'dayjs'
 import routeConfig from '@/assets/config/router.config'
+
+import {
+  getStorage
+} from '@/assets/utils'
 
 export default {
   data () {
@@ -86,6 +94,32 @@ export default {
       birthdayDialogVisible: false
     }
   },
+  computed: {
+    yearAge () {
+      if (!this.birthday) return
+
+      const today = dayjs()
+        .set('h', 0)
+        .set('m', 0)
+        .set('s', 0)
+        .set('ms', 0)
+      let birthday = dayjs(this.birthday)
+
+      const year = today.diff(birthday, 'year')
+      birthday = birthday.add(year, 'year')
+
+      const month = today.diff(birthday, 'month')
+      birthday = birthday.add(month, 'month')
+
+      const day = today.diff(birthday, 'day')
+
+      if (year > 0) {
+        return `${year}歲${month}月${day}天`
+      }
+
+      return `${month}月${day}天`
+    }
+  },
   methods: {
     saveBirthday () {
       this.$store.commit('setBirthday', {
@@ -96,13 +130,12 @@ export default {
     }
   },
   mounted () {
-    const birthday = localStorage.getItem('birthday')
+    const birthday = getStorage('birthday')
 
     if (birthday) {
-      this.$store.commit('setBirthday', {
-        birthday
-      })
       this.birthday = birthday
+
+      this.saveBirthday()
     } else {
       this.$toast.show('請設置寶寶生日')
       this.birthdayDialogVisible = true
@@ -110,3 +143,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.showAge {
+  display: inline-block;
+  margin-left: 5px;
+}
+</style>

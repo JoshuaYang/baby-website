@@ -16,7 +16,7 @@
 
             <v-spacer></v-spacer>
 
-            <v-chip class="chip-monthage">
+            <v-chip small>
               {{timelineItem.monthAge}}月龄
             </v-chip>
           </v-toolbar>
@@ -42,7 +42,6 @@
               </v-list-tile>
             </template>
 
-
           </v-list>
         </v-card>
 
@@ -52,10 +51,8 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import dayjs from 'dayjs'
-import {
-  parseTimelineData
-} from '@/assets/utils'
 
 import {
   queryTimelines
@@ -79,17 +76,44 @@ export default {
         .format('YYYY-MM-DD')
     }
   },
+  methods: {
+    parseTimelineData (data) {
+      // 根據月齡分組，鍵為月齡
+      const groupMonthAgeDatas = _.groupBy(data, 'monthAge')
+
+      // 將分組的鍵根據時間先後排序
+      const sortedKeys = Object.keys(groupMonthAgeDatas).sort((x, y) => x - y)
+
+      // 根據時間先後，構建出最終數組
+      const timelineData = sortedKeys.map(key => {
+        const groupMonthAgeData = groupMonthAgeDatas[key]
+
+        const groupCategoryDatas = _.groupBy(groupMonthAgeData, 'category.name')
+
+        const groupCategoryData = []
+        for (const [key, value] of Object.entries(groupCategoryDatas)) {
+          groupCategoryData.push({
+            name: key,
+            items: value
+          })
+        }
+
+        return {
+          monthAge: +key,
+          categories: groupCategoryData
+        }
+      })
+
+      return timelineData
+    }
+  },
   async mounted () {
     const response = await queryTimelines()
 
-    this.timelineData = parseTimelineData(response.data.list)
+    this.timelineData = this.parseTimelineData(response.data.list)
   }
 }
 </script>
 
 <style scoped lang="scss">
-.page-timeline {
-  .v-timeline {
-  }
-}
 </style>
