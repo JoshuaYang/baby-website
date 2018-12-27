@@ -2,27 +2,50 @@
   <div class="page-timeline">
     <v-timeline dense>
       <v-timeline-item
-        v-for="(item, index) in timelineData"
-        :key="index"
+        v-for="(timelineItem, timelineIndex) in timelineData"
+        :key="timelineIndex"
         color="pink"
       >
-        <v-card class="elevation-2">
-          <v-card-title class="headline">
-            {{$store.state.birthday | addMonthAge(item.monthAge)}}
-            <v-chip class="chip-monthage" color="pink" text-color="white">
-              {{item.monthAge}}月龄
+        <v-card>
+          <v-toolbar color="pink" dark>
+            <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
+
+            <v-toolbar-title>
+              {{$store.state.birthday | addMonthAge(timelineItem.monthAge)}}
+            </v-toolbar-title>
+
+            <v-spacer></v-spacer>
+
+            <v-chip class="chip-monthage">
+              {{timelineItem.monthAge}}月龄
             </v-chip>
-          </v-card-title>
-          <v-card-text>
-            <v-subheader>分類</v-subheader>
-            <div v-for="(data, dataIndex) in item.data" :key="dataIndex">
-              <v-checkbox
-                :label="data.title"
-                v-model="data.checked"
-              ></v-checkbox>
-            </div>
-          </v-card-text>
+          </v-toolbar>
+
+          <v-list subheader>
+            <template v-for="(categoryItem, categoryIndex) in timelineItem.categories">
+              <v-subheader>{{categoryItem.name}}</v-subheader>
+
+              <v-list-tile 
+                v-for="(item, itemIndex) in categoryItem.items" 
+                :key="item._id"
+                @click="">
+
+                <v-list-tile-action>
+                  <v-checkbox v-model="item.checked" hide-details></v-checkbox>
+                </v-list-tile-action>
+
+                <v-list-tile-content>
+                  <v-list-tile-title>
+                    {{item.description}}
+                  </v-list-tile-title>
+                </v-list-tile-content>
+              </v-list-tile>
+            </template>
+
+
+          </v-list>
         </v-card>
+
       </v-timeline-item>
     </v-timeline>
   </div>
@@ -30,20 +53,18 @@
 
 <script>
 import dayjs from 'dayjs'
+import {
+  parseTimelineData
+} from '@/assets/utils'
 
 import {
   queryTimelines
 } from '@/assets/services/timeline'
 
-import {
-  timelineData
-} from '@/assets/timelineData'
-// console.log('==========', timelineData)
-
 export default {
   data () {
     return {
-      timelineData
+      timelineData: []
     }
   },
   filters: {
@@ -61,7 +82,7 @@ export default {
   async mounted () {
     const response = await queryTimelines()
 
-    console.log('==========', response.data)
+    this.timelineData = parseTimelineData(response.data.list)
   }
 }
 </script>
@@ -69,24 +90,6 @@ export default {
 <style scoped lang="scss">
 .page-timeline {
   .v-timeline {
-    .chip-monthage {
-      margin-left: 15px;
-    }
-
-    .v-input--selection-controls {
-      margin-top: 0;
-      padding-top: 0;
-
-      .v-input__slot {
-        margin-bottom: 0;
-      }
-    }
-
-    .v-input--is-label-active {
-      label {
-        text-decoration: line-through;
-      }
-    }
   }
 }
 </style>
