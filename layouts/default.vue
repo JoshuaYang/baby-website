@@ -113,6 +113,10 @@ export default {
 
       const day = today.diff(birthday, 'day')
 
+      if (year < 0 || month < 0 || day < 0) {
+        return '尚未出生'
+      }
+
       if (year > 0) {
         return `${year}歲${month}月${day}天`
       }
