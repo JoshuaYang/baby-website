@@ -136,8 +136,6 @@ export default {
     const responseData = this.parseTimelineData(response.data.list)
     const storageData = getStorage('timelineData') || {}
 
-    console.log(storageData)
-
     const timelineData = defaultsDeep(storageData, responseData)
 
     this.timelineData = timelineData
