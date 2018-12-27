@@ -86,7 +86,7 @@ import {
 export default {
   data () {
     return {
-      title: 'Baby Website',
+      title: 'Baby Wiki',
       showMenu: false,
       routeConfig,
 
