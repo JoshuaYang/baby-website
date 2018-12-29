@@ -1,5 +1,12 @@
+import path from 'path'
+import fs from 'fs'
+
 module.exports = {
   server: {
+    https: {
+      key: fs.readFileSync(path.resolve(__dirname, 'sslforfree', 'private.key')),
+      cert: fs.readFileSync(path.resolve(__dirname, 'sslforfree', 'certificate.crt'))
+    },
     port: 3003 // default: 3000
     // host: '0.0.0.0', // default: localhost
   },
